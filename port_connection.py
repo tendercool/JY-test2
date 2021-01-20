@@ -8,10 +8,11 @@ class port_connect(QObject):
         self.port_state = 0
         self.ser = QSerialPort()
         self.ser_info = QSerialPortInfo()
-        
+
+        self.check()
 
 
-    def run(self):
+    def set_port(self):
         if self.check_signal != '':
             self.check()
         self.connect()
@@ -20,12 +21,10 @@ class port_connect(QObject):
         self.read()
 
     def check(self):
-        self.com_dic = {}
-        port_info = QSerialPortInfo()
+        port_info = self.ser_info.availablePorts()
         for port in port_info:
-            self.com_dict['%s' % port[0]] = '%s' % port[1]
-            print(self.com_dict)
-        self.port_list.emit(str(self.com_dic))
+            port_id = port.portName()
+        return port_id
 
     def connect(self):
         pass
