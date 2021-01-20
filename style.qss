@@ -1,0 +1,36 @@
+QPushButton {
+    font-size: 12px;
+    
+    background-color: #bfbae9
+      
+}
+
+QMainWindow{
+    background-color: #ab93ec
+}
+
+QDialog{
+    background-color: #3104fd
+}
+
+QMessageBox{
+    background-color: #04ff4f
+}
+
+
+QPushButton:hover
+{
+   
+    background-color:rgb(44 , 137 , 255);
+}
+
+
+QPushButton:pressed
+{
+   
+    background-color:rgb(14 , 135 , 228);
+   
+    padding-left:3px;
+    
+    padding-top:3px;
+}
