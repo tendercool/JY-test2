@@ -942,7 +942,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_29"/>
+         <widget class="QLineEdit" name="pcs_val_1"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_55">
@@ -952,7 +952,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_30"/>
+         <widget class="QLineEdit" name="pcs_val_2"/>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_56">
@@ -962,7 +962,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_31"/>
+         <widget class="QLineEdit" name="pcs_val_3"/>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_57">
@@ -972,7 +972,7 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_32"/>
+         <widget class="QLineEdit" name="pcs_val_4"/>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_58">
@@ -982,7 +982,7 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_33"/>
+         <widget class="QLineEdit" name="pcs_val_5"/>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_59">
@@ -992,7 +992,7 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit_34"/>
+         <widget class="QLineEdit" name="pcs_val_6"/>
         </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_60">
@@ -1002,7 +1002,7 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEdit_35"/>
+         <widget class="QLineEdit" name="pcs_val_7"/>
         </item>
         <item row="7" column="0">
          <widget class="QLabel" name="label_61">
@@ -1012,7 +1012,7 @@
          </widget>
         </item>
         <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit_36"/>
+         <widget class="QLineEdit" name="pcs_val_8"/>
         </item>
         <item row="8" column="0">
          <widget class="QLabel" name="label_62">
@@ -1022,7 +1022,7 @@
          </widget>
         </item>
         <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_37"/>
+         <widget class="QLineEdit" name="pcs_val_9"/>
         </item>
         <item row="9" column="0">
          <widget class="QLabel" name="label_63">
@@ -1032,7 +1032,7 @@
          </widget>
         </item>
         <item row="9" column="1">
-         <widget class="QLineEdit" name="lineEdit_38"/>
+         <widget class="QLineEdit" name="pcs_val_10"/>
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_64">
@@ -1042,7 +1042,7 @@
          </widget>
         </item>
         <item row="10" column="1">
-         <widget class="QLineEdit" name="lineEdit_39"/>
+         <widget class="QLineEdit" name="pcs_val_11"/>
         </item>
         <item row="11" column="0">
          <widget class="QLabel" name="label_65">
@@ -1052,7 +1052,7 @@
          </widget>
         </item>
         <item row="11" column="1">
-         <widget class="QLineEdit" name="lineEdit_40"/>
+         <widget class="QLineEdit" name="pcs_val_12"/>
         </item>
         <item row="12" column="0">
          <widget class="QLabel" name="label_66">
@@ -1062,7 +1062,7 @@
          </widget>
         </item>
         <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_41"/>
+         <widget class="QLineEdit" name="pcs_val_13"/>
         </item>
        </layout>
       </widget>
@@ -1093,7 +1093,7 @@
         <property name="title">
          <string>模式设定</string>
         </property>
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="pcs_offnet_model">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1106,7 +1106,7 @@
           <string>离网模式</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="pcs_onnet_model">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1119,7 +1119,7 @@
           <string>并网模式</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_46">
+        <widget class="QPushButton" name="btn_netchange_confirm">
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -1145,7 +1145,7 @@
         <property name="title">
          <string>启停控制</string>
         </property>
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="pcs_on">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1158,7 +1158,7 @@
           <string>启动</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radioButton_4">
+        <widget class="QRadioButton" name="pcs_off">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1171,7 +1171,7 @@
           <string>停止</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_47">
+        <widget class="QPushButton" name="btn_state_confirm">
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -1185,7 +1185,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QPushButton" name="pushButton_48">
+       <widget class="QPushButton" name="btn_clear">
         <property name="geometry">
          <rect>
           <x>80</x>
@@ -1212,7 +1212,7 @@
         </property>
        </widget>
        <zorder>groupBox_29</zorder>
-       <zorder>pushButton_48</zorder>
+       <zorder>btn_clear</zorder>
        <zorder>groupBox_26</zorder>
        <zorder>groupBox_27</zorder>
       </widget>
@@ -1229,7 +1229,7 @@
       <property name="title">
        <string>PSC故障</string>
       </property>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="pcs_mistakes">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1284,7 +1284,7 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEdit_68"/>
+         <widget class="QLineEdit" name="bms_val_7"/>
         </item>
         <item row="14" column="0">
          <widget class="QLabel" name="label_114">
@@ -1297,13 +1297,13 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit_67"/>
+         <widget class="QLineEdit" name="bms_val_6"/>
         </item>
         <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_74"/>
+         <widget class="QLineEdit" name="bms_val_13"/>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_65"/>
+         <widget class="QLineEdit" name="bms_val_4"/>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_77">
@@ -1323,10 +1323,10 @@
          </widget>
         </item>
         <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit_69"/>
+         <widget class="QLineEdit" name="bms_val_8"/>
         </item>
         <item row="9" column="1">
-         <widget class="QLineEdit" name="lineEdit_71"/>
+         <widget class="QLineEdit" name="bms_val_10"/>
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_84">
@@ -1339,7 +1339,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_62"/>
+         <widget class="QLineEdit" name="bms_val_1"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_74">
@@ -1359,7 +1359,7 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_66"/>
+         <widget class="QLineEdit" name="bms_val_5"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_75">
@@ -1376,7 +1376,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_63"/>
+         <widget class="QLineEdit" name="bms_val_2"/>
         </item>
         <item row="9" column="0">
          <widget class="QLabel" name="label_83">
@@ -1396,16 +1396,16 @@
          </widget>
         </item>
         <item row="14" column="1">
-         <widget class="QLineEdit" name="lineEdit_101"/>
+         <widget class="QLineEdit" name="bms_val_14"/>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_64"/>
+         <widget class="QLineEdit" name="bms_val_3"/>
         </item>
         <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_70"/>
+         <widget class="QLineEdit" name="bms_val_9"/>
         </item>
         <item row="10" column="1">
-         <widget class="QLineEdit" name="lineEdit_72"/>
+         <widget class="QLineEdit" name="bms_val_11"/>
         </item>
         <item row="12" column="0">
          <widget class="QLabel" name="label_86">
@@ -1442,10 +1442,10 @@
          </widget>
         </item>
         <item row="11" column="1">
-         <widget class="QLineEdit" name="lineEdit_73"/>
+         <widget class="QLineEdit" name="bms_val_12"/>
         </item>
         <item row="15" column="1">
-         <widget class="QLineEdit" name="lineEdit_102"/>
+         <widget class="QLineEdit" name="bms_val_15"/>
         </item>
        </layout>
       </widget>
@@ -1466,7 +1466,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_33">
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_78"/>
+         <widget class="QLineEdit" name="bms_val_19"/>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_90">
@@ -1476,7 +1476,7 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_79"/>
+         <widget class="QLineEdit" name="bms_val_20"/>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_91">
@@ -1507,10 +1507,10 @@
          </widget>
         </item>
         <item row="11" column="1">
-         <widget class="QLineEdit" name="lineEdit_86"/>
+         <widget class="QLineEdit" name="bms_val_27"/>
         </item>
         <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit_82"/>
+         <widget class="QLineEdit" name="bms_val_23"/>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_92">
@@ -1548,16 +1548,16 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEdit_81"/>
+         <widget class="QLineEdit" name="bms_val_22"/>
         </item>
         <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_83"/>
+         <widget class="QLineEdit" name="bms_val_24"/>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit_80"/>
+         <widget class="QLineEdit" name="bms_val_21"/>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_75"/>
+         <widget class="QLineEdit" name="bms_val_16"/>
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_97">
@@ -1567,16 +1567,16 @@
          </widget>
         </item>
         <item row="10" column="1">
-         <widget class="QLineEdit" name="lineEdit_85"/>
+         <widget class="QLineEdit" name="bms_val_26"/>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_77"/>
+         <widget class="QLineEdit" name="bms_val_18"/>
         </item>
         <item row="9" column="1">
-         <widget class="QLineEdit" name="lineEdit_84"/>
+         <widget class="QLineEdit" name="bms_val_25"/>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_76"/>
+         <widget class="QLineEdit" name="bms_val_17"/>
         </item>
         <item row="8" column="0">
          <widget class="QLabel" name="label_95">
@@ -1599,7 +1599,7 @@
        <property name="title">
         <string>充放电状态</string>
        </property>
-       <widget class="QRadioButton" name="radioButton_5">
+       <widget class="QRadioButton" name="no_in">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1612,7 +1612,7 @@
          <string>禁止充放电</string>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton_6">
+       <widget class="QRadioButton" name="in_out">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1625,7 +1625,7 @@
          <string>可充可放</string>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton_7">
+       <widget class="QRadioButton" name="only_in">
         <property name="geometry">
          <rect>
           <x>140</x>
@@ -1638,7 +1638,7 @@
          <string>只能充电</string>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton_8">
+       <widget class="QRadioButton" name="only_out">
         <property name="geometry">
          <rect>
           <x>140</x>
@@ -1665,7 +1665,7 @@
       <property name="title">
        <string>BMS故障</string>
       </property>
-      <widget class="QTextEdit" name="textEdit_3">
+      <widget class="QTextEdit" name="bms_mistakes">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1731,7 +1731,7 @@
          </widget>
         </item>
         <item row="15" column="1">
-         <widget class="QLineEdit" name="lineEdit_61"/>
+         <widget class="QLineEdit" name="diesel_val_15"/>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_70">
@@ -1748,13 +1748,13 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_42"/>
+         <widget class="QLineEdit" name="diesel_val_4"/>
         </item>
         <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit_43"/>
+         <widget class="QLineEdit" name="diesel_val_8"/>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_44"/>
+         <widget class="QLineEdit" name="diesel_val_1"/>
         </item>
         <item row="11" column="0">
          <widget class="QLabel" name="label_72">
@@ -1764,13 +1764,13 @@
          </widget>
         </item>
         <item row="16" column="1">
-         <widget class="QLineEdit" name="lineEdit_59"/>
+         <widget class="QLineEdit" name="diesel_val_16"/>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_45"/>
+         <widget class="QLineEdit" name="diesel_val_2"/>
         </item>
         <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_46"/>
+         <widget class="QLineEdit" name="diesel_val_9"/>
         </item>
         <item row="13" column="0">
          <widget class="QLabel" name="label_73">
@@ -1780,10 +1780,10 @@
          </widget>
         </item>
         <item row="10" column="1">
-         <widget class="QLineEdit" name="lineEdit_47"/>
+         <widget class="QLineEdit" name="diesel_val_11"/>
         </item>
         <item row="13" column="1">
-         <widget class="QLineEdit" name="lineEdit_60"/>
+         <widget class="QLineEdit" name="diesel_val_14"/>
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_99">
@@ -1793,7 +1793,7 @@
          </widget>
         </item>
         <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_48"/>
+         <widget class="QLineEdit" name="diesel_val_13"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_100">
@@ -1810,7 +1810,7 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit_49"/>
+         <widget class="QLineEdit" name="diesel_val_6"/>
         </item>
         <item row="16" column="0">
          <widget class="QLabel" name="label_102">
@@ -1827,16 +1827,16 @@
          </widget>
         </item>
         <item row="9" column="1">
-         <widget class="QLineEdit" name="lineEdit_50"/>
+         <widget class="QLineEdit" name="diesel_val_10"/>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_51"/>
+         <widget class="QLineEdit" name="diesel_val_5"/>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_52"/>
+         <widget class="QLineEdit" name="diesel_val_3"/>
         </item>
         <item row="11" column="1">
-         <widget class="QLineEdit" name="lineEdit_53"/>
+         <widget class="QLineEdit" name="diesel_val_12"/>
         </item>
         <item row="15" column="0">
          <widget class="QLabel" name="label_104">
@@ -1846,7 +1846,7 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEdit_54"/>
+         <widget class="QLineEdit" name="diesel_val_7"/>
         </item>
         <item row="12" column="0">
          <widget class="QLabel" name="label_105">
@@ -1891,7 +1891,7 @@
       <property name="title">
        <string>柴发告警信息</string>
       </property>
-      <widget class="QTextEdit" name="textEdit_2">
+      <widget class="QTextEdit" name="diesel_mistakes">
        <property name="geometry">
         <rect>
          <x>10</x>
