@@ -9,15 +9,7 @@ class port_connect(QWidget):
         super().__init__()
         self.port_state = 0
         self.ser = serial.Serial()
-
-    def set_port(self):
-        
-        self.connect()
-        self.disconnect()
-        self.send()
-        self.read()
-
-    
+  
 
     def connect(self,port,baud,parity,data,stop):
         self.ser.port = port
@@ -34,7 +26,23 @@ class port_connect(QWidget):
         self.ser.close()
 
     def read(self):
-        pass
+        try:
+            num = self.ser.isWating()
+        except :
+            self.ser.close()
+            return None
+        if num > 0:
+            data = self.ser.read(num)
+            num = len(data)
+            out_s = ''
+            for i in range(0,num):
+                out_s = out_s + '{:02X}'.format(data[i])
+            return out_s
+            
+    def send_msg(self,msg):
+        if self.ser.isOpen():
+            msg_s = msg
+            msg_s = msg_s.strip()
+            msg_s = bytes(msg_s.encode('utf-8'))
+            self.ser.write(msg_s)
 
-    def send(self):
-        pass

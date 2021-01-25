@@ -22,7 +22,8 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.btn_checkport.clicked.connect(self.port_check)
         self.btn_connect_port.clicked.connect(self.port_connection)
         self.btn_disconnect_port.clicked.connect(self.port_close)
-       
+        self.btn_city_on.clicked.connect(self.btn_city_on_cb)
+        self.btn_city_off.clicked.connect(self.btn_city_off_cb)
 
     def port_check(self):
         self.comboBox_port.clear()
@@ -59,9 +60,8 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
             self.btn_checkport.setEnabled(False)
             self.btn_connect_port.setEnabled(False)
             self.groupBox_2.setEnabled(False)
-            self.port_signal.setPixmap(QPixmap('g:\\PyQt\\JY-test2\\image/green_pic.png'))
-            self.manger_signal.setPixmap(QPixmap('g:\\PyQt\\JY-test2\\image/green_pic.png'))
-            
+            self.port_signal.setPixmap(QPixmap('./image/green_pic.png'))
+            self.manger_signal.setPixmap(QPixmap('./image/green_pic.png'))          
 
 
     def port_close(self):
@@ -71,9 +71,23 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
             self.btn_checkport.setEnabled(True)
             self.btn_connect_port.setEnabled(True)
             self.groupBox_2.setEnabled(True)
-            self.port_signal.setPixmap(QPixmap('g:\\PyQt\\JY-test2\\image/red_pic.png'))
-            self.manger_signal.setPixmap(QPixmap('g:\\PyQt\\JY-test2\\image/red_pic.png'))
+            self.port_signal.setPixmap(QPixmap('./image/red_pic.png'))
+            self.manger_signal.setPixmap(QPixmap('./image/red_pic.png'))
 
+    def btn_city_on_cb(self):
+        msg = 'AABBCCDDEEFF'
+        self.port_connect.send_msg(msg)
+
+        self.city_power_p_val.setText('5000')
+        self.city_power_q_val.setText('3000')
+        self.city_voltage_val.setText('300')
+        self.city_current_val.setText('200')
+
+    def btn_city_off_cb(self):
+        self.city_current_val.clear()
+        self.city_voltage_val.clear()
+        self.city_power_p_val.clear()
+        self.city_power_q_val.clear()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
