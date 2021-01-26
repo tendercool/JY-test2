@@ -6,6 +6,8 @@ import serial.tools.list_ports
 import port_connection
 import sys
 import Ui_JY1_newset
+import tcp_connection
+
 
 
 
@@ -24,6 +26,8 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.btn_disconnect_port.clicked.connect(self.port_close)
         self.btn_city_on.clicked.connect(self.btn_city_on_cb)
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
+
+       
 
     def port_check(self):
         self.comboBox_port.clear()

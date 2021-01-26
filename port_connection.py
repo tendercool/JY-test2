@@ -1,10 +1,11 @@
-from PyQt5.Qt import QThread,QObject
+from PyQt5.Qt import QObject
 import serial
 import serial.tools.list_ports
 from PyQt5.QtWidgets import QMessageBox,QWidget
 
 
 class port_connect(QWidget):
+    
     def __init__(self):
         super().__init__()
         self.port_state = 0
