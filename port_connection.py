@@ -69,4 +69,4 @@ class port_connect(QObject):
             msg_s = msg.strip()
             msg_s = bytes(msg_s.encode('utf-8'))
             self.ser.write(msg_s)
-
+        print(msg)
