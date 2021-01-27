@@ -2,29 +2,51 @@ from PyQt5.Qt import QObject
 import serial
 import serial.tools.list_ports
 from PyQt5.QtWidgets import QMessageBox,QWidget
+from PyQt5.QtCore import QThread,pyqtSignal
 
 
-class port_connect(QWidget):
-    
-    def __init__(self):
+class port_connect(QObject):
+    oksignal = pyqtSignal(str)
+    wrongsignal = pyqtSignal(str)
+    closesignal = pyqtSignal(str)
+    def __init__(self,list):
         super().__init__()
         self.port_state = 0
-        self.ser = serial.Serial()
-  
+        # self.ser = serial.Serial()
+        # self.ser.port = port
+        # self.ser.baudrate = baud
+        # self.ser.parity = parity
+        # self.ser.bytesize = data
+        # self.ser.stopbit = stop
+        self.port_info = list
+        # self.ser.port = self.port_info[0]
+        # self.ser.baudrate = self.port_info[1]
+        # self.ser.parity = self.port_info[2]
+        # self.ser.bytesize = self.port_info[3]
+        # self.ser.stopbit = self.port_info[4]
+        # self.connect()
+        
+       
 
-    def connect(self,port,baud,parity,data,stop):
-        self.ser.port = port
-        self.ser.baudrate = baud
-        self.ser.parity = parity
-        self.ser.bytesize = data
-        self.ser.stopbit = stop
+    def connect(self):
+        self.ser = serial.Serial()
+        self.ser.port = self.port_info[0]
+        self.ser.baudrate = self.port_info[1]
+        self.ser.parity = self.port_info[2]
+        self.ser.bytesize = self.port_info[3]
+        self.ser.stopbit = self.port_info[4]
         try:
             self.ser.open()
+            # print(self.ser.port)
+            self.oksignal.emit('OK')
+               
         except:
-            QMessageBox.critical(self,'错误','当前端口无法打开')
+            # QMessageBox.critical(self,'错误','当前端口无法打开')
+            self.wrongsignal.emit('当前端口无法打开')
 
-    def disconnect(self):
-        self.ser.close()
+    # def disconnect(self):
+    #     self.ser.close()
+        
 
     def read(self):
         try:

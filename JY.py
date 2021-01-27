@@ -7,6 +7,7 @@ import port_connection
 import sys
 import Ui_JY1_newset
 import tcp_connection
+from PyQt5.QtCore import QThread,pyqtSignal
 
 
 
@@ -19,14 +20,14 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         with open("style.qss", 'r') as f:
             qApp.setStyleSheet(f.read())
 
-        self.port_connect = port_connection.port_connect()
+        # self.port_connect = port_connection.port_connect()
         self.tabWidget.setEnabled(False)
         self.btn_checkport.clicked.connect(self.port_check)
         self.btn_connect_port.clicked.connect(self.port_connection)
         self.btn_disconnect_port.clicked.connect(self.port_close)
         self.btn_city_on.clicked.connect(self.btn_city_on_cb)
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
-
+       
        
 
     def port_check(self):
@@ -43,7 +44,7 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
                 self.comboBox_port.addItem(coms[0])
         com.close()
             
-      
+    
 
     def port_connection(self):
         self.baud = int(self.comboBox_baud.currentText())
@@ -57,26 +58,40 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.data = int(self.comboBox_byte.currentText())
         self.stop = int(self.comboBox_stop.currentText())
         self.port = self.comboBox_port.currentText()
-        self.port_connect.connect(self.port,self.baud,self.parity,self.data,self.stop)
-        if self.port_connect.ser.isOpen():
-            QMessageBox.warning(self,'提示','%s串口已打开'%self.port)
-            self.tabWidget.setEnabled(True)
-            self.btn_checkport.setEnabled(False)
-            self.btn_connect_port.setEnabled(False)
-            self.groupBox_2.setEnabled(False)
-            self.port_signal.setPixmap(QPixmap('./image/green_pic.png'))
-            self.manger_signal.setPixmap(QPixmap('./image/green_pic.png'))          
+        port_info = [self.port,self.baud,self.parity,self.data,self.stop]
+        self.port_connect = port_connection.port_connect(port_info)
+        # self.port_connect.connect(self.port,self.baud,self.parity,self.data,self.stop)
+        self.port_thread = QThread()
+        self.port_connect.oksignal.connect(self.checkok)
+        self.port_connect.wrongsignal.connect(self.checkno)
+        self.port_connect.moveToThread(self.port_thread)
+        self.port_thread.started.connect(self.port_connect.connect)
+        self.port_thread.start()
+        
+
+    def checkno(self,str):
+        QMessageBox.warning(self,'Wrong',str)
+    
+    def checkok(self,str):
+        QMessageBox.warning(self,'提示','%s串口已打开'%self.port)
+        self.tabWidget.setEnabled(True)
+        self.btn_checkport.setEnabled(False)
+        self.btn_connect_port.setEnabled(False)
+        self.groupBox_2.setEnabled(False)
+        self.port_signal.setPixmap(QPixmap('./image/green_pic.png'))
+        self.manger_signal.setPixmap(QPixmap('./image/green_pic.png'))          
 
 
     def port_close(self):
-        self.port_connect.disconnect()
-        if self.port_connect.ser.isOpen() == 0:
-            self.tabWidget.setEnabled(False)
-            self.btn_checkport.setEnabled(True)
-            self.btn_connect_port.setEnabled(True)
-            self.groupBox_2.setEnabled(True)
-            self.port_signal.setPixmap(QPixmap('./image/red_pic.png'))
-            self.manger_signal.setPixmap(QPixmap('./image/red_pic.png'))
+        # self.port_connect.disconnect()
+        self.port_thread.terminate()
+        # if self.port_connect.connect.ser.isOpen() == 0:
+        self.tabWidget.setEnabled(False)
+        self.btn_checkport.setEnabled(True)
+        self.btn_connect_port.setEnabled(True)
+        self.groupBox_2.setEnabled(True)
+        self.port_signal.setPixmap(QPixmap('./image/red_pic.png'))
+        self.manger_signal.setPixmap(QPixmap('./image/red_pic.png'))
 
     def btn_city_on_cb(self):
         msg = 'AABBCCDDEEFF'
