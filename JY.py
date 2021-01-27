@@ -58,6 +58,7 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.data = int(self.comboBox_byte.currentText())
         self.stop = int(self.comboBox_stop.currentText())
         self.port = self.comboBox_port.currentText()
+
         port_info = [self.port,self.baud,self.parity,self.data,self.stop]
         self.port_connect = port_connection.port_connect(port_info)
         # self.port_connect.connect(self.port,self.baud,self.parity,self.data,self.stop)
@@ -68,9 +69,11 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.port_thread.started.connect(self.port_connect.connect)
         self.port_thread.start()
         
+        # self.port_connect.send_msg.moveToThread(self.port_connect)
 
     def checkno(self,str):
         QMessageBox.warning(self,'Wrong',str)
+        self.port_thread.terminate()
     
     def checkok(self,str):
         QMessageBox.warning(self,'提示','%s串口已打开'%self.port)

@@ -9,6 +9,7 @@ class port_connect(QObject):
     oksignal = pyqtSignal(str)
     wrongsignal = pyqtSignal(str)
     closesignal = pyqtSignal(str)
+    read_msg_signal = pyqtSignal(str)
     def __init__(self,list):
         super().__init__()
         self.port_state = 0
@@ -45,7 +46,8 @@ class port_connect(QObject):
             self.wrongsignal.emit('当前端口无法打开')
 
     # def disconnect(self):
-    #     self.ser.close()
+    #     self.ser.close()  
+        self.read()
         
 
     def read(self):
@@ -60,12 +62,11 @@ class port_connect(QObject):
             out_s = ''
             for i in range(0,num):
                 out_s = out_s + '{:02X}'.format(data[i])
-            return out_s
+            self.read_msg_signal.emit(out_s)
             
     def send_msg(self,msg):
         if self.ser.isOpen():
-            msg_s = msg
-            msg_s = msg_s.strip()
+            msg_s = msg.strip()
             msg_s = bytes(msg_s.encode('utf-8'))
             self.ser.write(msg_s)
 
