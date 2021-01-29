@@ -7,7 +7,7 @@ import port_connection
 import sys
 import Ui_JY1_newset
 import tcp_connection
-from PyQt5.QtCore import QThread,pyqtSignal
+from PyQt5.QtCore import QThread,pyqtSignal,QTimer
 
 
 
@@ -28,7 +28,11 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         self.btn_city_on.clicked.connect(self.btn_city_on_cb)
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
        
-       
+        self.ctiy_flag = 0
+        self.val_str = ''
+        self.time_refresh = QTimer()
+        self.time_refresh.start(1000)
+        self.time_refresh.timeout.connect(self.val_update)
 
     def port_check(self):
         self.comboBox_port.clear()
@@ -62,18 +66,27 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
         port_info = [self.port,self.baud,self.parity,self.data,self.stop]
         self.port_connect = port_connection.port_connect(port_info)
         # self.port_connect.connect(self.port,self.baud,self.parity,self.data,self.stop)
-        self.port_thread = QThread()
+        # self.port_thread = QThread()
+        # self.port_connect = 
         self.port_connect.oksignal.connect(self.checkok)
         self.port_connect.wrongsignal.connect(self.checkno)
-        self.port_connect.moveToThread(self.port_thread)
-        self.port_thread.started.connect(self.port_connect.connect)
-        self.port_thread.start()
+        # self.port_connect.moveToThread(self.port_thread)
+        # self.port_thread.started.connect(self.port_connect.connect)
+        self.port_connect.start()
         
         # self.port_connect.send_msg.moveToThread(self.port_connect)
 
+        self.port_connect.read_msg_signal.connect(self.datarec)
+
+        
+    
+    def datarec(self,data):
+        self.val_str = data
+        # return val_str
+
     def checkno(self,str):
         QMessageBox.warning(self,'Wrong',str)
-        self.port_thread.terminate()
+        self.port_connect.terminate()
     
     def checkok(self,str):
         QMessageBox.warning(self,'提示','%s串口已打开'%self.port)
@@ -87,7 +100,7 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
 
     def port_close(self):
         # self.port_connect.disconnect()
-        self.port_thread.terminate()
+        self.port_connect.port_state = 0
         # if self.port_connect.connect.ser.isOpen() == 0:
         self.tabWidget.setEnabled(False)
         self.btn_checkport.setEnabled(True)
@@ -99,17 +112,31 @@ class JY_Main(QMainWindow,Ui_JY1_newset.Ui_MainWindow):
     def btn_city_on_cb(self):
         msg = 'AABBCCDDEEFF'
         self.port_connect.send_msg(msg)
+        self.ctiy_flag = 1
 
-        self.city_power_p_val.setText('5000')
-        self.city_power_q_val.setText('3000')
-        self.city_voltage_val.setText('300')
-        self.city_current_val.setText('200')
+        # self.city_power_p_val.setText('5000')
+        # self.city_power_q_val.setText('3000')
+        # self.city_voltage_val.setText('300')
+        # self.city_current_val.setText('200')
 
     def btn_city_off_cb(self):
+        self.ctiy_flag = 0
         self.city_current_val.clear()
         self.city_voltage_val.clear()
         self.city_power_p_val.clear()
         self.city_power_q_val.clear()
+
+    def val_update(self):
+        val_get = self.val_str
+        if self.ctiy_flag == 1:
+            self.city_power_p_val.setText(str(int(val_get[0:4],16)) + 'W')
+            self.city_power_q_val.setText(str(int(val_get[5:8],16)) + 'W')
+            self.city_voltage_val.setText(str(int(val_get[9:12],16)) + 'V')
+            self.city_current_val.setText(str(int(val_get[12:16],16)) + 'A')
+            # self.city_power_p_val.setText(val_get[0:4])
+            # self.city_power_q_val.setText(val_get[4:8])
+            # self.city_voltage_val.setText(val_get[8:12])
+            # self.city_current_val.setText(val_get[12:16])
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
