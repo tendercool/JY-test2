@@ -26,12 +26,12 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
 
         self.ctiy_flag = 0
-        self.val_str = ''
-        self.time_refresh = QTimer()
-        self.time_refresh.start(1000)
-        self.time_refresh.timeout.connect(self.val_update)
+        self.sig_2km_flag = 0
+
 
         self.btn_disconnect_port.setEnabled(False)
+        self.btn_2KM_on.clicked.connect(self.btn_2KM_on_cb)
+        self.btn_2KM_off.clicked.connect(self.btn_2KM_off_cb)
 
     def port_check(self):
         self.comboBox_port.clear()
@@ -63,15 +63,12 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.port_connect.oksignal.connect(self.checkok)
         self.port_connect.wrongsignal.connect(self.checkno)
         self.port_connect.start()
-        self.port_connect.read_msg_signal.connect(self.datarec)
+        self.port_connect.read_msg_signal.connect(self.val_update)
         self.btn_disconnect_port.setEnabled(True)
-
-    def datarec(self, data):
-        self.val_str = data
-
+ 
     def checkno(self, str):
         QMessageBox.warning(self, 'Wrong', str)
-        self.port_connect.terminate()
+        self.port_connect.port_state = 0
 
     def checkok(self, str):
         QMessageBox.warning(self, '提示', '%s串口已打开' % self.port)
@@ -93,7 +90,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_disconnect_port.setEnabled(False)
 
     def btn_city_on_cb(self):
-        msg = 'AABBCCDDEEFF'
+        msg = 'CITY IS ON'
         self.port_connect.send_msg(msg)
         self.ctiy_flag = 1
 
@@ -104,13 +101,23 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.city_power_p_val.clear()
         self.city_power_q_val.clear()
 
-    def val_update(self):
-        val_get = self.val_str
-        if self.ctiy_flag == 1:
-            self.city_power_p_val.setText(str(int(val_get[0:4], 16)) + 'W')
-            self.city_power_q_val.setText(str(int(val_get[4:8], 16)) + 'W')
-            self.city_voltage_val.setText(str(int(val_get[8:12], 16)) + 'V')
-            self.city_current_val.setText(str(int(val_get[12:16], 16)) + 'A')
+    def btn_2KM_on_cb(self):
+        msg = '2KM IS ON'
+        self.port_connect.send_msg(msg)
+        self.sig_2km_flag = 1
+
+    def btn_2KM_off_cb(self):
+        self.sig_2km_flag = 0
+
+
+    def val_update(self,data):
+        if data != ' ':
+            val_get = data
+            if self.ctiy_flag == 1:
+                self.city_power_p_val.setText(str(int(val_get[0:4], 16)) + 'W')
+                self.city_power_q_val.setText(str(int(val_get[4:8], 16)) + 'W')
+                self.city_voltage_val.setText(str(int(val_get[8:12], 16)) + 'V')
+                self.city_current_val.setText(str(int(val_get[12:16], 16)) + 'A')
 
 
 if __name__ == '__main__':
