@@ -14,7 +14,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle('JY1_test')
+        self.setWindowTitle('JY1_test -- by:燊林')
         with open("style.qss", 'r') as f:
             qApp.setStyleSheet(f.read())
 
@@ -23,15 +23,40 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_connect_port.clicked.connect(self.port_connection)
         self.btn_disconnect_port.clicked.connect(self.port_close)
         self.btn_city_on.clicked.connect(self.btn_city_on_cb)
+        self.btn_city_off.setEnabled(False)
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
 
         self.ctiy_flag = 0
         self.sig_2km_flag = 0
-
+        self.sig_pv_flag = 0
+        self.sig_load1_flag = 0
+        self.sig_load2_flag = 0
+        self.sig_load3_flag = 0
+        self.sig_diesel_flag = 0
+        self.sig_bms_flag = 0
 
         self.btn_disconnect_port.setEnabled(False)
         self.btn_2KM_on.clicked.connect(self.btn_2KM_on_cb)
+        self.btn_2KM_off.setEnabled(False)
         self.btn_2KM_off.clicked.connect(self.btn_2KM_off_cb)
+        self.btn_3KM_on.clicked.connect(self.btn_3KM_on_cb)
+        self.btn_3KM_off.setEnabled(False)
+        self.btn_3KM_off.clicked.connect(self.btn_3KM_off_cb)
+        self.btn_5KM_on.clicked.connect(self.btn_5KM_on_cb)
+        self.btn_5KM_off.setEnabled(False)
+        self.btn_5KM_off.clicked.connect(self.btn_5KM_off_cb)
+        self.btn_6KM_on.clicked.connect(self.btn_6KM_on_cb)
+        self.btn_6KM_off.setEnabled(False)
+        self.btn_6KM_off.clicked.connect(self.btn_6KM_off_cb)
+        self.btn_7KM_on.clicked.connect(self.btn_7KM_on_cb)
+        self.btn_7KM_off.setEnabled(False)
+        self.btn_7KM_off.clicked.connect(self.btn_7KM_off_cb)
+        self.btn_8KM_on.clicked.connect(self.btn_8KM_on_cb)
+        self.btn_8KM_off.setEnabled(False)
+        self.btn_8KM_off.clicked.connect(self.btn_8KM_off_cb)
+        self.btn_9KM_on.clicked.connect(self.btn_9KM_on_cb)
+        self.btn_9KM_off.setEnabled(False)
+        self.btn_9KM_off.clicked.connect(self.btn_9KM_off_cb)
 
     def port_check(self):
         self.comboBox_port.clear()
@@ -65,6 +90,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.port_connect.start()
         self.port_connect.read_msg_signal.connect(self.val_update)
         self.btn_disconnect_port.setEnabled(True)
+        self.groupBox_14.setEnabled(False)
  
     def checkno(self, str):
         QMessageBox.warning(self, 'Wrong', str)
@@ -93,6 +119,8 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         msg = 'CITY IS ON'
         self.port_connect.send_msg(msg)
         self.ctiy_flag = 1
+        self.btn_city_on.setEnabled(False)
+        self.btn_city_off.setEnabled(True)
 
     def btn_city_off_cb(self):
         self.ctiy_flag = 0
@@ -100,15 +128,113 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.city_voltage_val.clear()
         self.city_power_p_val.clear()
         self.city_power_q_val.clear()
+        self.btn_city_off.setEnabled(False)
+        self.btn_city_on.setEnabled(True)
 
     def btn_2KM_on_cb(self):
         msg = '2KM IS ON'
         self.port_connect.send_msg(msg)
         self.sig_2km_flag = 1
+        self.btn_2KM_on.setEnabled(False)
+        self.btn_2KM_off.setEnabled(True)
 
     def btn_2KM_off_cb(self):
         self.sig_2km_flag = 0
+        self.btn_2KM_off.setEnabled(False)
+        self.btn_2KM_on.setEnabled(True)
 
+    def btn_3KM_on_cb(self):
+        self.sig_pv_flag = 1
+        msg = '3KM IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_3KM_on.setEnabled(False)
+        self.btn_3KM_off.setEnabled(True)
+        self.pv_signal.setPixmap(QPixmap('./image/green_pic.png'))
+    
+    def btn_3KM_off_cb(self):
+        self.sig_pv_flag = 0
+        self.pv_power_p_val.clear()
+        self.pv_power_q_val.clear()
+        self.pv_current_val.clear()
+        self.btn_3KM_off.setEnabled(False)
+        self.btn_3KM_on.setEnabled(True)
+        self.pv_signal.setPixmap(QPixmap('./image/red_pic.png'))
+
+    def btn_5KM_on_cb(self):
+        self.sig_load1_flag = 1
+        msg = '5KM IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_5KM_on.setEnabled(False)
+        self.btn_5KM_off.setEnabled(True)
+    
+    def btn_5KM_off_cb(self):
+        self.sig_load1_flag = 0
+        self.load_1_q_val.clear()
+        self.load_1_q_val.clear()
+        self.load_1_current.clear()
+        self.btn_5KM_off.setEnabled(False)
+        self.btn_5KM_on.setEnabled(True)
+
+    def btn_6KM_on_cb(self):
+        self.sig_load2_flag = 1
+        msg = '6KM IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_6KM_on.setEnabled(False)
+        self.btn_6KM_off.setEnabled(True)
+    
+    def btn_6KM_off_cb(self):
+        self.sig_load2_flag = 0
+        self.load_2_q_val.clear()
+        self.load_2_q_val.clear()
+        self.load_2_current.clear()
+        self.btn_6KM_off.setEnabled(False)
+        self.btn_6KM_on.setEnabled(True)
+
+    def btn_7KM_on_cb(self):
+        self.sig_load3_flag = 1
+        msg = '7KM IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_7KM_on.setEnabled(False)
+        self.btn_7KM_off.setEnabled(True)
+    
+    def btn_7KM_off_cb(self):
+        self.sig_load3_flag = 0
+        self.load_3_q_val.clear()
+        self.load_3_q_val.clear()
+        self.load_3_current.clear()
+        self.btn_7KM_off.setEnabled(False)
+        self.btn_7KM_on.setEnabled(True)
+    
+    def btn_8KM_on_cb(self):
+        self.groupBox_14.setEnabled(True)
+        self.sig_diesel_flag = 1
+        msg = '8QF IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_8KM_on.setEnabled(False)
+        self.btn_8KM_off.setEnabled(True)
+        self.diesel_signal.setPixmap(QPixmap('./image/green_pic.png'))
+
+    def btn_8KM_off_cb(self):
+        self.sig_diesel_flag = 0
+        self.groupBox_14.setEnabled(False)
+        self.btn_8KM_on.setEnabled(True)
+        self.btn_8KM_off.setEnabled(False)
+        self.diesel_signal.setPixmap(QPixmap('./image/red_pic.png'))
+
+    def btn_9KM_on_cb(self):
+        self.sig_bms_flag = 1
+        msg = '9QF IS ON'
+        self.port_connect.send_msg(msg)
+        self.btn_9KM_on.setEnabled(False)
+        self.btn_9KM_off.setEnabled(True)
+        self.bms_signal.setPixmap(QPixmap('./image/green_pic.png'))
+
+    def btn_9KM_off_cb(self):
+        self.sig_bms_flag = 0
+        self.groupBox_14.setEnabled(False)
+        self.btn_9KM_on.setEnabled(True)
+        self.btn_9KM_off.setEnabled(False)
+        self.bms_signal.setPixmap(QPixmap('./image/red_pic.png'))
 
     def val_update(self,data):
         if data != ' ':
@@ -118,7 +244,14 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
                 self.city_power_q_val.setText(str(int(val_get[4:8], 16)) + 'W')
                 self.city_voltage_val.setText(str(int(val_get[8:12], 16)) + 'V')
                 self.city_current_val.setText(str(int(val_get[12:16], 16)) + 'A')
-
+            if self.sig_pv_flag == 1:
+                self.pv_power_p_val.setText(str(int(val_get[16:20], 16)) + 'W')
+                self.pv_power_q_val.setText(str(int(val_get[20:24], 16)) + 'W')
+                self.pv_current_val.setText(str(int(val_get[24:28], 16)) + 'A')
+            if self.sig_load1_flag == 1:
+                self.pv_power_p_val.setText(str(int(val_get[28:32], 16)) + 'W')
+                self.pv_power_q_val.setText(str(int(val_get[32:36], 16)) + 'W')
+                self.pv_current_val.setText(str(int(val_get[36:40], 16)) + 'A')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

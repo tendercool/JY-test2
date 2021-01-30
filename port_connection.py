@@ -1,4 +1,3 @@
-# from PyQt5.Qt import QObject
 import serial
 import serial.tools.list_ports
 from PyQt5.QtWidgets import QMessageBox, QWidget
@@ -19,8 +18,7 @@ class port_connect(QThread):
 
     def run(self):
         self.ser = serial.Serial()
-        # self.ser.port = self.port_info[0]
-        self.ser.port = 'COM1'
+        self.ser.port = self.port_info[0]
         self.ser.baudrate = self.port_info[1]
         self.ser.parity = self.port_info[2]
         self.ser.bytesize = self.port_info[3]
@@ -55,7 +53,7 @@ class port_connect(QThread):
                 out_s = out_s + '{:02X}'.format(data[i])
             self.read_msg_signal.emit(out_s)
         else:
-            self.serCloseFlag = 1
+            pass
 
     def send_msg(self, msg):
         if self.ser.isOpen():
