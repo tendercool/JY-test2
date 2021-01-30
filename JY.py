@@ -249,9 +249,17 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
                 self.pv_power_q_val.setText(str(int(val_get[20:24], 16)) + 'W')
                 self.pv_current_val.setText(str(int(val_get[24:28], 16)) + 'A')
             if self.sig_load1_flag == 1:
-                self.pv_power_p_val.setText(str(int(val_get[28:32], 16)) + 'W')
-                self.pv_power_q_val.setText(str(int(val_get[32:36], 16)) + 'W')
-                self.pv_current_val.setText(str(int(val_get[36:40], 16)) + 'A')
+                self.load_1_p_val.setText(str(int(val_get[28:32], 16)) + 'W')
+                self.load_1_q_val.setText(str(int(val_get[32:36], 16)) + 'W')
+                self.load_1_current.setText(str(int(val_get[36:40], 16)) + 'A')
+            if self.sig_load2_flag == 1:
+                self.load_2_p_val.setText(str(int(val_get[40:44], 16)) + 'W')
+                self.load_2_q_val.setText(str(int(val_get[44:48], 16)) + 'W')
+                self.load_2_current.setText(str(int(val_get[48:52], 16)) + 'A')
+            if self.sig_load3_flag == 1:
+                self.load_3_p_val.setText(str(int(val_get[52:56], 16)) + 'W')
+                self.load_3_q_val.setText(str(int(val_get[56:60], 16)) + 'W')
+                self.load_3_current.setText(str(int(val_get[60:64], 16)) + 'A')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
