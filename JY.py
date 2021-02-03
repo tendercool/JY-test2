@@ -17,6 +17,10 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.setWindowTitle('JY1_test -- by:燊林')
         with open("style.qss", 'r') as f:
             qApp.setStyleSheet(f.read())
+        
+        self.bms_val = ['bms_val_1','bms_val_2','bms_val_3','bms_val_4','bms_val_5','bms_val_6','bms_val_7','bms_val_8','bms_val_9',
+        'bms_val_10','bms_val_11','bms_val_12','bms_val_13','bms_val_14','bms_val_15','bms_val_16','bms_val_17','bms_val_18',
+        'bms_val_19','bms_val_20','bms_val_21','bms_val_22','bms_val_23','bms_val_24','bms_val_25','bms_val_26','bms_val_27']
 
         self.tabWidget.setEnabled(False)
         self.btn_checkport.clicked.connect(self.port_check)
@@ -293,6 +297,11 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
                 self.load_3_p_val.setText(str(int(val_get[52:56], 16)) + 'W')
                 self.load_3_q_val.setText(str(int(val_get[56:60], 16)) + 'W')
                 self.load_3_current.setText(str(int(val_get[60:64], 16)) + 'A')
+            if self.sig_bms_flag == 1:
+                for i in range(0,27):
+                    exec('self.%s.setText("%s")' %(self.bms_val[i],str(int(val_get[64+i:68+i],16))))
+
+            
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

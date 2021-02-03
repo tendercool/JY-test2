@@ -51,7 +51,8 @@ class port_connect(QThread):
             out_s = ''
             for i in range(0, num):
                 out_s = out_s + '{:02X}'.format(data[i])
-            self.read_msg_signal.emit(out_s)
+            if out_s[0:4] == 'ABFF' and out_s[-4:] == 'ABFF':
+                self.read_msg_signal.emit(out_s)
         else:
             pass
 
