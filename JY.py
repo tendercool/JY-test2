@@ -8,7 +8,7 @@ import sys
 import Ui_JY1_newset
 import tcp_connection
 from PyQt5.QtCore import QThread, pyqtSignal, QTimer
-
+import socket
 
 class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
     def __init__(self):
@@ -25,6 +25,9 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_city_on.clicked.connect(self.btn_city_on_cb)
         self.btn_city_off.setEnabled(False)
         self.btn_city_off.clicked.connect(self.btn_city_off_cb)
+
+        self.btn_tcp_retry.clicked.connect(self.tcp_host)
+        self.btn_connect_tcp.clicked.connect(self.tcp_connection)
 
         self.ctiy_flag = 0
         self.sig_2km_flag = 0
@@ -115,6 +118,37 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.manger_signal.setPixmap(QPixmap('./image/red_pic.png'))
         self.btn_disconnect_port.setEnabled(False)
 
+    def tcp_host(self):
+        self.home_ip.clear()
+        s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        try:
+            s.connect(('8.8.8.8',80))
+            my_addr = s.getsockname()[0]
+            self.home_ip.setText(str(my_addr))
+        except:
+            try:
+                my_addr = socket.gethostbyname(socket.gethostbyname())
+                self.home_ip.setText(str(my_addr))
+            except :
+                QMessageBox.warning(self,'错误','无法获取IP，请连接网络！')
+        finally:
+            s.close()
+
+    def tcp_connection(self):
+        addr = self.aim_ip.text()
+        port = int(self.aim_port.text())
+        self.tcp_connect = tcp_connection.tcp_connnect(addr,port)
+        self.tcp_connect.oksignal.connect(self.tcp_ok)
+        self.tcp_connect.wrongsignal.connect(self.tcp_no)
+        self.tcp_connect.start()
+        self.tcp_connect.datasignal.connect(self.val_update)
+
+    def tcp_ok(self,data):
+            QMessageBox.information(self,'OK',data)
+    
+    def tcp_no(self,data):
+            QMessageBox.information(self,'NO',data)
+
     def btn_city_on_cb(self):
         msg = 'CITY IS ON'
         self.port_connect.send_msg(msg)
@@ -170,7 +204,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
     def btn_5KM_off_cb(self):
         self.sig_load1_flag = 0
         self.load_1_q_val.clear()
-        self.load_1_q_val.clear()
+        self.load_1_p_val.clear()
         self.load_1_current.clear()
         self.btn_5KM_off.setEnabled(False)
         self.btn_5KM_on.setEnabled(True)
@@ -185,7 +219,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
     def btn_6KM_off_cb(self):
         self.sig_load2_flag = 0
         self.load_2_q_val.clear()
-        self.load_2_q_val.clear()
+        self.load_2_p_val.clear()
         self.load_2_current.clear()
         self.btn_6KM_off.setEnabled(False)
         self.btn_6KM_on.setEnabled(True)
@@ -200,7 +234,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
     def btn_7KM_off_cb(self):
         self.sig_load3_flag = 0
         self.load_3_q_val.clear()
-        self.load_3_q_val.clear()
+        self.load_3_p_val.clear()
         self.load_3_current.clear()
         self.btn_7KM_off.setEnabled(False)
         self.btn_7KM_on.setEnabled(True)
@@ -231,7 +265,6 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
 
     def btn_9KM_off_cb(self):
         self.sig_bms_flag = 0
-        self.groupBox_14.setEnabled(False)
         self.btn_9KM_on.setEnabled(True)
         self.btn_9KM_off.setEnabled(False)
         self.bms_signal.setPixmap(QPixmap('./image/red_pic.png'))
