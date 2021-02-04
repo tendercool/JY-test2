@@ -183,8 +183,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         else:
             self.sig_pcs_flag = 0
             for i in range(0, 13):
-                    exec('self.%s.setText("%s")' %
-                         (self.pcs_val[i], ''))
+                exec('self.%s.setText("%s")' % (self.pcs_val[i], ''))
 
     def btn_city_on_cb(self):
         msg = 'CITY IS ON'
@@ -290,15 +289,14 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_8KM_on.setEnabled(True)
         self.btn_8KM_off.setEnabled(False)
         self.diesel_signal.setPixmap(QPixmap('./image/red_pic.png'))
-    
+
     def diesel_on_cb(self):
         self.sig_diesel_flag = 1
-    
+
     def diesel_off_cb(self):
         self.sig_diesel_flag = 0
         for i in range(0, 16):
-            exec('self.%s.setText("%s")' %
-                    (self.diesel_val[i], ''))
+            exec('self.%s.setText("%s")' % (self.diesel_val[i], ''))
 
     def btn_9KM_on_cb(self):
         self.sig_bms_flag = 1
@@ -314,8 +312,7 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
         self.btn_9KM_off.setEnabled(False)
         self.bms_signal.setPixmap(QPixmap('./image/red_pic.png'))
         for i in range(0, 27):
-                    exec('self.%s.setText("%s")' %
-                         (self.bms_val[i], ''))
+            exec('self.%s.setText("%s")' % (self.bms_val[i], ''))
 
     def val_update(self, data):
         if data != ' ':
@@ -346,18 +343,19 @@ class JY_Main(QMainWindow, Ui_JY1_newset.Ui_MainWindow):
             if self.sig_bms_flag == 1:
                 for i in range(0, 27):
                     exec('self.%s.setText("%s")' %
-                         (self.bms_val[i], str(int(val_get[64 + 4*i:68 + 4*i],
-                                                   16))))
+                         (self.bms_val[i],
+                          str(int(val_get[64 + 4 * i:68 + 4 * i], 16))))
             if self.sig_pcs_flag == 1:
                 for i in range(0, 13):
                     exec('self.%s.setText("%s")' %
-                         (self.pcs_val[i], str(int(val_get[162 + 4*i:166 + 4*i],
-                                                   16))))
+                         (self.pcs_val[i],
+                          str(int(val_get[162 + 4 * i:166 + 4 * i], 16))))
             if self.sig_diesel_flag == 1:
                 for i in range(0, 16):
                     exec('self.%s.setText("%s")' %
-                         (self.diesel_val[i], str(int(val_get[204 + 4*i:208 + 4*i],
-                                                   16))))
+                         (self.diesel_val[i],
+                          str(int(val_get[204 + 4 * i:208 + 4 * i], 16))))
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

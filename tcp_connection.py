@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtCore import QThread,pyqtSignal
-import socket
+import socket,time
 
 class tcp_connnect(QThread):
     oksignal = pyqtSignal(str)
